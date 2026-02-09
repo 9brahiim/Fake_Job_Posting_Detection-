@@ -141,13 +141,6 @@ This project utilizes the **Fake Job Postings** dataset available on Kaggle:
 - **F1-Score**: Balanced precision-recall performance
 - **API Response Time**: < 2 seconds per prediction
 
-## License
-
-This project is licensed under the MIT License.
-
-## Author
-
-9brahiim
 
 ## Acknowledgments
 
