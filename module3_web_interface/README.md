@@ -1,30 +1,34 @@
 # Module 3: Web Interface & Prediction API
 
 ## Overview
-This module provides a web interface and API for real-time fake job detection.
 
-## Files
-- `app.py`: Flask/FastAPI application
-- `prediction_service.py`: Service for making predictions
-- `templates/`: HTML templates for the web interface
-- `static/`: CSS, JavaScript, and static assets
+This module provides a RESTful API and web-based user interface for real-time fake job posting detection and classification.
 
-## Usage
+## Components
+
+- `app.py`: Flask/FastAPI application server
+- `prediction_service.py`: Prediction service implementation
+- `templates/`: HTML template files for web interface
+- `static/`: CSS stylesheets, JavaScript files, and static assets
+
+## Execution
 
 ```bash
-# Run Flask app
+# Flask application
 python module3_web_interface/app.py
 
-# Or with FastAPI
+# FastAPI alternative (if implemented)
 uvicorn module3_web_interface.app:app --reload
 ```
 
 ## API Endpoints
-- `GET /`: Home page with prediction form
+
+- `GET /`: Web interface home page with prediction form
 - `POST /predict`: Prediction API endpoint
-- `GET /health`: Health check endpoint
+- `GET /health`: Application health check endpoint
 
 ## Features
-- User-friendly web form for job description input
-- Real-time prediction with confidence scores
-- Preprocessing pipeline matching training phase
+
+- Web-based job description input form
+- Real-time prediction with confidence score calculation
+- Preprocessing pipeline consistency with training phase

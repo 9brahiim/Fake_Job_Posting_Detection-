@@ -1,95 +1,97 @@
 # Contributing Guidelines
 
-Thank you for your interest in contributing to the Fake Job Detection project! This document provides guidelines for collaborating on different modules.
+This document outlines the contribution process and development standards for the Fake Job Detection project.
 
-## Project Structure
+## Project Architecture
 
-The project is divided into 4 main modules:
+The project is organized into four independent modules:
 
 - **Module 1**: `module1_data_preprocessing/` - Data collection and preprocessing
-- **Module 2**: `module2_model_training/` - ML model training and evaluation
-- **Module 3**: `module3_web_interface/` - Web interface and API
-- **Module 4**: `module4_dashboard/` - Admin dashboard and analytics
+- **Module 2**: `module2_model_training/` - Machine learning model training and evaluation
+- **Module 3**: `module3_web_interface/` - Web interface and API implementation
+- **Module 4**: `module4_dashboard/` - Administrative dashboard and analytics
 
-## Getting Started
+## Initial Setup
 
-1. **Fork the repository** and clone it locally
-2. **Create a virtual environment**:
+1. Fork the repository and clone your fork locally
+2. Create a virtual environment:
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
-3. **Install dependencies**:
+3. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+  pip install -r requirements.txt
    ```
-4. **Run setup script**:
+4. Run the setup script:
    ```bash
    python setup.py
    ```
 
-## Module Assignment
-
-Each collaborator should work on their assigned module:
+## Module Responsibilities
 
 ### Module 1: Data Preprocessing
-**Files to work on:**
+
+**Primary Files**:
 - `module1_data_preprocessing/data_loader.py`
 - `module1_data_preprocessing/text_preprocessor.py`
 - `module1_data_preprocessing/feature_extractor.py`
 - `module1_data_preprocessing/main.py`
 
-**Tasks:**
-- Implement data loading and inspection
-- Complete text cleaning and normalization
-- Implement TF-IDF feature extraction
-- Test preprocessing pipeline
+**Responsibilities**:
+- Implement data loading and validation procedures
+- Develop text cleaning and normalization algorithms
+- Implement TF-IDF feature extraction pipeline
+- Create comprehensive test suite for preprocessing operations
 
 ### Module 2: Model Training
-**Files to work on:**
+
+**Primary Files**:
 - `module2_model_training/model_trainer.py`
 - `module2_model_training/model_evaluator.py`
 - `module2_model_training/main.py`
 
-**Tasks:**
-- Train Logistic Regression model
-- Train Random Forest model
-- Implement evaluation metrics
-- Compare models and select best one
-- Ensure accuracy > 90%
+**Responsibilities**:
+- Implement Logistic Regression classifier
+- Implement Random Forest classifier
+- Develop evaluation metrics framework
+- Perform comparative model analysis
+- Ensure accuracy threshold ≥ 90%
 
 ### Module 3: Web Interface
-**Files to work on:**
+
+**Primary Files**:
 - `module3_web_interface/app.py`
 - `module3_web_interface/prediction_service.py`
 - `module3_web_interface/templates/index.html`
 - `module3_web_interface/static/css/style.css`
 - `module3_web_interface/static/js/main.js`
 
-**Tasks:**
-- Implement Flask/FastAPI backend
-- Create user-friendly web form
+**Responsibilities**:
+- Implement Flask/FastAPI backend architecture
+- Design user interface components
 - Integrate prediction service
-- Display results with confidence scores
+- Implement result visualization with confidence metrics
 
-### Module 4: Dashboard & Admin
-**Files to work on:**
+### Module 4: Dashboard & Administration
+
+**Primary Files**:
 - `module4_dashboard/database.py`
 - `module4_dashboard/auth.py`
 - `module4_dashboard/dashboard.py`
 - `module4_dashboard/admin_routes.py`
 - `module4_dashboard/templates/admin/*.html`
 
-**Tasks:**
-- Implement database models
-- Create authentication system
-- Build admin dashboard
-- Add visualizations (charts)
-- Implement export functionality
+**Responsibilities**:
+- Design database schema and models
+- Implement authentication and authorization system
+- Develop administrative dashboard interface
+- Create data visualization components
+- Implement data export functionality
 
-## Git Workflow
+## Version Control Workflow
 
-1. **Create a branch** for your module:
+1. Create a feature branch for your module:
    ```bash
    git checkout -b module1-data-preprocessing
    # or
@@ -97,57 +99,64 @@ Each collaborator should work on their assigned module:
    # etc.
    ```
 
-2. **Make your changes** and test thoroughly
+2. Implement changes and conduct thorough testing
 
-3. **Commit your changes** with clear messages:
+3. Commit changes with descriptive messages:
    ```bash
    git add .
    git commit -m "Module 1: Implement text preprocessing pipeline"
    ```
 
-4. **Push to your fork**:
+4. Push to your fork:
    ```bash
    git push origin module1-data-preprocessing
    ```
 
-5. **Create a Pull Request** with:
-   - Clear description of changes
-   - Which module you worked on
-   - Any issues or questions
+5. Create a Pull Request containing:
+   - Detailed description of implemented changes
+   - Module assignment information
+   - Known issues or limitations
+   - Testing methodology and results
 
-## Code Style
+## Code Standards
 
-- Follow PEP 8 for Python code
-- Use meaningful variable and function names
-- Add docstrings to functions and classes
-- Comment complex logic
-- Keep functions focused and small
+- Adhere to PEP 8 style guidelines for Python code
+- Use descriptive variable and function names
+- Include comprehensive docstrings for all functions and classes
+- Add inline comments for complex algorithmic logic
+- Maintain single responsibility principle for functions
 
-## Testing
+## Testing Requirements
 
-Before submitting your code:
+Before submitting code:
 
-1. **Test your module independently**
-2. **Test integration** with other modules if applicable
-3. **Check for errors** and handle edge cases
-4. **Verify output** matches expected format
+1. Execute module-specific test suite
+2. Perform integration testing with dependent modules
+3. Validate error handling and edge case coverage
+4. Verify output format compliance with specifications
 
-## Communication
+## Communication Protocol
 
-- Use GitHub Issues for bugs and feature requests
-- Use Pull Request comments for code review discussions
-- Update README.md if you add new features or change setup
+- Use GitHub Issues for bug reports and feature requests
+- Utilize Pull Request comments for code review discussions
+- Update project documentation (README.md) when adding features or modifying setup procedures
 
-## Questions?
+## Technical Inquiries
 
-If you have questions about:
-- **Module 1**: Data preprocessing and NLP
-- **Module 2**: Machine learning models
-- **Module 3**: Web development and APIs
-- **Module 4**: Database and admin features
+For questions regarding:
+- **Module 1**: Data preprocessing and NLP implementation
+- **Module 2**: Machine learning model development
+- **Module 3**: Web development and API architecture
+- **Module 4**: Database design and administrative features
 
-Feel free to open an issue or contact the project maintainer.
+Please open an issue in the GitHub repository or contact the project maintainer.
 
-## Thank You!
+## Code Review Process
 
-Your contributions make this project better. Happy coding! 🚀
+All contributions require review before merging. Reviewers will evaluate:
+- Code quality and adherence to standards
+- Test coverage and validation
+- Documentation completeness
+- Integration compatibility
+
+Thank you for contributing to this project.

@@ -1,25 +1,28 @@
-# Module 2: Fake Job Classification Model
+# Module 2: Machine Learning Model Training & Evaluation
 
 ## Overview
-This module handles training, evaluating, and comparing machine learning models for fake job detection.
 
-## Files
-- `model_trainer.py`: Train Logistic Regression and Random Forest models
-- `model_evaluator.py`: Evaluate models using various metrics
-- `model_comparison.py`: Compare model performance
-- `main.py`: Main script to run the training pipeline
+This module implements the machine learning model training pipeline, evaluation framework, and comparative analysis for fake job posting classification.
 
-## Usage
+## Components
+
+- `model_trainer.py`: Model training implementation for Logistic Regression and Random Forest classifiers
+- `model_evaluator.py`: Evaluation metrics calculation and reporting
+- `main.py`: Main training and evaluation pipeline execution script
+
+## Execution
 
 ```bash
 python module2_model_training/main.py
 ```
 
-## Output
-- Trained models saved to `models/` directory
-- Evaluation reports and metrics
-- Best model selected and saved
+## Output Artifacts
 
-## Target Metrics
-- Accuracy: > 90%
-- Strong F1-Score for balanced performance
+- Trained model files in `models/` directory
+- Evaluation metrics and performance reports
+- Best performing model selection and serialization
+
+## Performance Targets
+
+- Classification Accuracy: ≥ 90%
+- F1-Score: Balanced precision-recall performance
