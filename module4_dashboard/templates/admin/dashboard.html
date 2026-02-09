@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - JobCheck</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">JobCheck Admin Dashboard</span>
+            <div>
+                <span class="text-white me-3">Welcome, {{ session.get('admin_username', 'Admin') }}</span>
+                <a href="{{ url_for('admin.admin_logout') }}" class="btn btn-outline-light btn-sm">Logout</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-4">
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Predictions</h5>
+                        <h2>{{ stats.total_predictions }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <h5 class="card-title">Real Jobs</h5>
+                        <h2>{{ stats.real_count }}</h2>
+                        <small>{{ "%.1f"|format(stats.real_percentage) }}%</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-danger">
+                    <div class="card-body">
+                        <h5 class="card-title">Fake Jobs</h5>
+                        <h2>{{ stats.fake_count }}</h2>
+                        <small>{{ "%.1f"|format(stats.fake_percentage) }}%</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Actions</h5>
+                        <a href="{{ url_for('admin.export_csv') }}" class="btn btn-light btn-sm">Export CSV</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Charts -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Real vs Fake Distribution</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Daily Prediction Trend</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Predictions -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Recent Predictions</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Prediction</th>
+                                <th>Confidence</th>
+                                <th>Real %</th>
+                                <th>Fake %</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pred in recent_predictions %}
+                            <tr>
+                                <td>{{ pred.id }}</td>
+                                <td>
+                                    <span class="badge bg-{{ 'danger' if pred.prediction == 'Fake' else 'success' }}">
+                                        {{ pred.prediction }}
+                                    </span>
+                                </td>
+                                <td>{{ "%.2f"|format(pred.confidence) }}%</td>
+                                <td>{{ "%.2f"|format(pred.probability_real) }}%</td>
+                                <td>{{ "%.2f"|format(pred.probability_fake) }}%</td>
+                                <td>{{ pred.timestamp }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Pie Chart
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Real', 'Fake'],
+                datasets: [{
+                    data: [{{ stats.real_count }}, {{ stats.fake_count }}],
+                    backgroundColor: ['#28a745', '#dc3545']
+                }]
+            }
+        });
+        
+        // Line Chart
+        const lineCtx = document.getElementById('lineChart').getContext('2d');
+        const trends = {{ trends|tojson }};
+        new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: trends.dates,
+                datasets: [{
+                    label: 'Total',
+                    data: trends.total,
+                    borderColor: '#007bff',
+                    tension: 0.1
+                }, {
+                    label: 'Real',
+                    data: trends.real,
+                    borderColor: '#28a745',
+                    tension: 0.1
+                }, {
+                    label: 'Fake',
+                    data: trends.fake,
+                    borderColor: '#dc3545',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
